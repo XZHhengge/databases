@@ -2,7 +2,8 @@
 import wx
 import wx.grid
 from sql import Sql_operation
-
+# global info
+# info = []
 class UserOperation(wx.Frame):
 # class UserOperation(wx.Dialog):
     '''
@@ -10,19 +11,21 @@ class UserOperation(wx.Frame):
     '''
 
     def __init__(self, *args, **kw):
-        print(args)
-        print(kw)
         # ensure the parent's __init__ is called
-        super(UserOperation, self).__init__(*args, **kw)
+        super(UserOperation, self).__init__(None, **kw)
         # 设置窗口屏幕居中
         self.Center()
         # 创建窗口
         self.pnl = wx.Panel(self)
         # 调用操作界面函数
-        self.OperationInterface()
+        self.OperationInterface(self, *args)
 
-    def OperationInterface(self):
+    def OperationInterface(self, *args):
         # 创建垂直方向box布局管理器
+
+        global info
+        info = args[1:]
+        # print(info)
         self.vbox = wx.BoxSizer(wx.VERTICAL)
         #################################################################################
         # 创建logo静态文本，设置字体属性
@@ -43,7 +46,7 @@ class UserOperation(wx.Frame):
         add_button = wx.Button(self.pnl, id=11, label="增", size=(150, 50))
         delete_button = wx.Button(self.pnl, id=12, label="删", size=(150, 50))
         change_button = wx.Button(self.pnl, id=14, label ="改", size=(150,50))
-        quit_button = wx.Button(self.pnl, id=13, label="退出系统", size=(150, 50))
+        quit_button = wx.Button(self.pnl, id=13, label="退出", size=(150, 50))
         self.Bind(wx.EVT_BUTTON, self.ClickButton, id=10, id2=13)
         # 添加操作按钮到vsbox布局管理器
         vsbox_button.Add(add_button, 0, wx.EXPAND | wx.BOTTOM, 40)
@@ -64,11 +67,11 @@ class UserOperation(wx.Frame):
         #################################################################################
         self.pnl.SetSizer(self.vbox)
 
-    def ClickButton(self, event):
+    def ClickButton(self, event, *args):
         source_id = event.GetId()
         if source_id == 10:
             print("查询操作！")
-            inquire_button = InquireOp(None, title=u"电力公司收费管理系统管理系统", size=(1024, 668))
+            inquire_button = InquireOp(info, title=u"电力公司收费管理系统管理系统", size=(1024, 668))
             inquire_button.Show()
             self.Close(True)
         elif source_id == 11:
@@ -88,8 +91,10 @@ class UserOperation(wx.Frame):
 # 继承UserOperation类，实现初始化操作界面
 class InquireOp(UserOperation):
     def __init__(self, *args, **kw):
+        print('awda')
+        print(args)
         # ensure the parent's __init__ is called
-        super(InquireOp, self).__init__(*args, **kw)
+        super(InquireOp, self).__init__(None, **kw)
         # 创建学生信息网格
         self.stu_grid = self.CreateGrid()
         self.stu_grid.Bind(wx.grid.EVT_GRID_LABEL_LEFT_CLICK, self.OnLabelleftClick)
@@ -116,8 +121,12 @@ class InquireOp(UserOperation):
     def CreateGrid(self):
         # 连接login_users数据库
         op = Sql_operation("databases")
+        asfd = UserOperation()
+        asfd.OperationInterface()
+        global info
+        print(info)
         # 获取stu_information表中的学生信息，返回为二维元组
-        np = op.FindAll(u"客户")
+        np = op.FindAll("%s" % (info[0]))
         # column_names = ("客户号", "客户名", "地址", "CSDN账号", "学习课程", "联系方式")
         column_names = (u"客户号", u"客户名", u"地址", u"联系方式", u'wada', u'awedada', u'wqdq')
         stu_grid = wx.grid.Grid(self.pnl)
