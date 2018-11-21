@@ -16,18 +16,18 @@ class MyFrame1(wx.Frame):
 
         self.m_button1 = wx.Button(self.m_panel1, wx.ID_ANY, u"操作客户表", (130, 20), wx.DefaultSize,
                                    style=wx.BORDER_MASK)
-        self.m_button2 = wx.Button(self.m_panel1, wx.ID_ANY, u"操作费用管理表", (250, 20), wx.DefaultSize,
+        self.m_button2 = wx.Button(self.m_panel1, wx.ID_ANY, u"操作员工", (250, 20), wx.DefaultSize,
                                    style=wx.BORDER_MASK)
-        self.m_button3 = wx.Button(self.m_panel1, wx.ID_ANY, u"操作收费等级表", (370, 20), wx.DefaultSize,
+        self.m_button3 = wx.Button(self.m_panel1, wx.ID_ANY, u"操作收费登记表", (370, 20), wx.DefaultSize,
                                    style=wx.BORDER_MASK)
-        self.m_button4 = wx.Button(self.m_panel1, wx.ID_ANY, u"操作电类型表", (130, 90), wx.DefaultSize,
+        self.m_button4 = wx.Button(self.m_panel1, wx.ID_ANY, u"操作用电信息表", (130, 90), wx.DefaultSize,
                                    style=wx.BORDER_MASK)
-        self.m_button5 = wx.Button(self.m_panel1, wx.ID_ANY, u"操作结余登记表", (250, 90), wx.DefaultSize,
+        self.m_button5 = wx.Button(self.m_panel1, wx.ID_ANY, u"操作用电类型表", (250, 90), wx.DefaultSize,
                                    style=wx.BORDER_MASK)
-        self.m_button6 = wx.Button(self.m_panel1, wx.ID_ANY, u"操作员工表", (370, 90), wx.DefaultSize,
+        self.m_button6 = wx.Button(self.m_panel1, wx.ID_ANY, u"操作费用管理表", (370, 90), wx.DefaultSize,
                                    style=wx.BORDER_MASK)
-        self.m_button7 = wx.Button(self.m_panel1, wx.ID_ANY, u"操作用电信息表", (130, 160), wx.DefaultSize,
-                                    style=wx.BORDER_MASK)
+        # self.m_button7 = wx.Button(self.m_panel1, wx.ID_ANY, u"操作用电信息表", (130, 160), wx.DefaultSize,
+        #                             style=wx.BORDER_MASK)
 
         self.m_button1.Bind(wx.EVT_BUTTON, response().Onclick)
         self.m_button2.Bind(wx.EVT_BUTTON, response2().Onclick)
@@ -46,21 +46,21 @@ class response():
 class response2():
     def Onclick(self, *args):
         opseration = UserOperation('员工', '员工号', '姓名', '性别', '联系方式',
-                                   title="广油计科17-1电力公司收费管理系统管理系统操作客户表", size=(1024,668))
+                                   title="广油计科17-1电力公司收费管理系统管理系统操作员工表", size=(1024,668))
         opseration.Show()
 
 # 收费登记
 class response3():
     def Onclick(self, *args):
         opseration = UserOperation('收费登记', '客户号', '月份', '员工号', '应收费用', '实收费用', '结余费用',
-                                   title="广油计科17-1电力公司收费管理系统管理系统操作员工表", size=(1024,668))
+                                   title="广油计科17-1电力公司收费管理系统管理系统操作收费登记表", size=(1024,668))
         opseration.Show()
 
 # 用电信息
 class response4():
     def Onclick(self, *args):
         opseration = UserOperation('用电信息', '客户号', '类别号', '月份', '客户_客户号', '用电度数',
-                                   title="广油计科17-1电力公司收费管理系统管理系统操作收费登记表", size=(1024,668))
+                                   title="广油计科17-1电力公司收费管理系统管理系统操作用电信息表", size=(1024,668))
         opseration.Show()
 
 # 用电类型

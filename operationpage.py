@@ -91,13 +91,12 @@ class UserOperation(wx.Frame):
 # 继承UserOperation类，实现初始化操作界面
 class InquireOp(UserOperation):
     def __init__(self, *args, **kw):
-        print('awda')
-        print(args)
         # ensure the parent's __init__ is called
+        # list1 = args[0]
         super(InquireOp, self).__init__(None, **kw)
         # 创建学生信息网格
-        self.stu_grid = self.CreateGrid()
-        self.stu_grid.Bind(wx.grid.EVT_GRID_LABEL_LEFT_CLICK, self.OnLabelleftClick)
+        self.stu_grid = self.CreateGrid(self, args[0])
+        # self.stu_grid.Bind(wx.grid.EVT_GRID_LABEL_LEFT_CLICK, self.OnLabelleftClick)
         # 添加到vsbox_show_operation布局管理器
         self.vsbox_show_operation.Add(self.stu_grid, 0, wx.CENTER | wx.TOP | wx.FIXED_MINSIZE, 30)
 
@@ -118,17 +117,17 @@ class InquireOp(UserOperation):
         elif source_id == 13:
             self.Close(True)
 
-    def CreateGrid(self):
+    def CreateGrid(self, *args):
+        global a,b
+        a = args[1]
+
+        b = a[0]
         # 连接login_users数据库
         op = Sql_operation("databases")
-        asfd = UserOperation()
-        asfd.OperationInterface()
-        global info
-        print(info)
         # 获取stu_information表中的学生信息，返回为二维元组
-        np = op.FindAll("%s" % (info[0]))
-        # column_names = ("客户号", "客户名", "地址", "CSDN账号", "学习课程", "联系方式")
-        column_names = (u"客户号", u"客户名", u"地址", u"联系方式", u'wada', u'awedada', u'wqdq')
+        np = op.FindAll(b)
+        column_names = (a[i] for i in range(len(a)))
+        column_names = tuple(column_names)
         stu_grid = wx.grid.Grid(self.pnl)
         stu_grid.CreateGrid(len(np), len(np[0]) - 1)
         for row in range(len(np)):
@@ -139,15 +138,15 @@ class InquireOp(UserOperation):
         stu_grid.AutoSize()
         return stu_grid
 
-    def OnLabelleftClick(self, event):
-        # 连接login_users数据库
-        op = Sql_operation("databases")
-        # 获取users表中的用户名和密码信息，返回为二维元组
-        np = op.FindAll(u"客户")
-        print("RowIdx: {0}".format(event.GetRow()))
-        print("ColIdx: {0}".format(event.GetRow()))
-        print(np[event.GetRow()])
-        event.Skip()
+    # def OnLabelleftClick(self, event):
+    #     # 连接login_users数据库
+    #     op = Sql_operation("databases")
+    #     # 获取users表中的用户名和密码信息，返回为二维元组
+    #     np = op.FindAll(b)
+    #     print("RowIdx: {0}".format(event.GetRow()))
+    #     print("ColIdx: {0}".format(event.GetRow()))
+    #     print(np[event.GetRow()])
+    #     event.Skip()
 
 
 # 继承UserOperation类，实现初始化操作界面
@@ -247,7 +246,7 @@ class DelOp(InquireOp):
         self.del_affirm.Bind(wx.EVT_BUTTON, self.DelAffirm)
         #################################################################################
         # 创建静态框
-        sb_del = wx.StaticBox(self.pnl, label="请选择需要删除的学生id")
+        sb_del = wx.StaticBox(self.pnl, label="请选择需要删除的id")
         # 创建水平方向box布局管理器
         hsbox_del = wx.StaticBoxSizer(sb_del, wx.HORIZONTAL)
         # 添加到hsbox_name布局管理器
