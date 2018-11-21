@@ -10,6 +10,8 @@ class UserOperation(wx.Frame):
     '''
 
     def __init__(self, *args, **kw):
+        print(args)
+        print(kw)
         # ensure the parent's __init__ is called
         super(UserOperation, self).__init__(*args, **kw)
         # 设置窗口屏幕居中
@@ -37,15 +39,17 @@ class UserOperation(wx.Frame):
         # 创建垂直方向box布局管理器
         vsbox_button = wx.StaticBoxSizer(sb_button, wx.VERTICAL)
         # 创建操作按钮、绑定事件处理
-        check_button = wx.Button(self.pnl, id=10, label="查看客户信息", size=(150, 50))
-        add_button = wx.Button(self.pnl, id=11, label="添加客户信息", size=(150, 50))
-        delete_button = wx.Button(self.pnl, id=12, label="删除客户信息", size=(150, 50))
+        check_button = wx.Button(self.pnl, id=10, label='查', size=(150, 50))
+        add_button = wx.Button(self.pnl, id=11, label="增", size=(150, 50))
+        delete_button = wx.Button(self.pnl, id=12, label="删", size=(150, 50))
+        change_button = wx.Button(self.pnl, id=14, label ="改", size=(150,50))
         quit_button = wx.Button(self.pnl, id=13, label="退出系统", size=(150, 50))
         self.Bind(wx.EVT_BUTTON, self.ClickButton, id=10, id2=13)
         # 添加操作按钮到vsbox布局管理器
-        vsbox_button.Add(check_button, 0, wx.EXPAND | wx.BOTTOM, 40)
         vsbox_button.Add(add_button, 0, wx.EXPAND | wx.BOTTOM, 40)
         vsbox_button.Add(delete_button, 0, wx.EXPAND | wx.BOTTOM, 40)
+        vsbox_button.Add(change_button, 0, wx.EXPAND | wx.BOTTOM, 40)
+        vsbox_button.Add(check_button, 0, wx.EXPAND | wx.BOTTOM, 40)
         vsbox_button.Add(quit_button, 0, wx.EXPAND | wx.BOTTOM, 200)
         # 创建静态框
         sb_show_operation = wx.StaticBox(self.pnl, label="显示/操作窗口", size=(800, 500))
@@ -115,7 +119,7 @@ class InquireOp(UserOperation):
         # 获取stu_information表中的学生信息，返回为二维元组
         np = op.FindAll(u"客户")
         # column_names = ("客户号", "客户名", "地址", "CSDN账号", "学习课程", "联系方式")
-        column_names = (u"客户号", u"客户名", u"地址", u"联系方式")
+        column_names = (u"客户号", u"客户名", u"地址", u"联系方式", u'wada', u'awedada', u'wqdq')
         stu_grid = wx.grid.Grid(self.pnl)
         stu_grid.CreateGrid(len(np), len(np[0]) - 1)
         for row in range(len(np)):
