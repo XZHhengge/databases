@@ -30,49 +30,43 @@ class MyFrame1(wx.Frame):
         #                             style=wx.BORDER_MASK)
 
         self.m_button1.Bind(wx.EVT_BUTTON, response().Onclick)
-        self.m_button2.Bind(wx.EVT_BUTTON, response2().Onclick)
-        self.m_button3.Bind(wx.EVT_BUTTON, response3().Onclick)
-        self.m_button4.Bind(wx.EVT_BUTTON, response4().Onclick)
-        self.m_button5.Bind(wx.EVT_BUTTON, response5().Onclick)
-        self.m_button6.Bind(wx.EVT_BUTTON, response6().Onclick)
+        self.m_button2.Bind(wx.EVT_BUTTON, response().Onclick2)
+        self.m_button3.Bind(wx.EVT_BUTTON, response().Onclick3)
+        self.m_button4.Bind(wx.EVT_BUTTON, response().Onclick4)
+        self.m_button5.Bind(wx.EVT_BUTTON, response().Onclick5)
+        self.m_button6.Bind(wx.EVT_BUTTON, response().Onclick6)
 # 客户
 class response():
     def Onclick(self, *args):
         opseration = UserOperation('客户', '客户号','客户名', '地址', '联系方式',
                                    title="广油计科17-1电力公司收费管理系统管理系统操作客户表", size=(1024,668))
         opseration.Show()
-
-# 员工
-class response2():
-    def Onclick(self, *args):
+        # 员工
+    def Onclick2(self, *args):
         opseration = UserOperation('员工', '员工号', '姓名', '性别', '联系方式',
                                    title="广油计科17-1电力公司收费管理系统管理系统操作员工表", size=(1024,668))
         opseration.Show()
 
-# 收费登记
-class response3():
-    def Onclick(self, *args):
+    # 收费登记
+    def Onclick3(self, *args):
         opseration = UserOperation('收费登记', '客户号', '月份', '员工号', '应收费用', '实收费用', '结余费用',
                                    title="广油计科17-1电力公司收费管理系统管理系统操作收费登记表", size=(1024,668))
         opseration.Show()
 
-# 用电信息
-class response4():
-    def Onclick(self, *args):
+    # 用电信息
+    def Onclick4(self, *args):
         opseration = UserOperation('用电信息', '客户号', '类别号', '月份', '客户_客户号', '用电度数',
                                    title="广油计科17-1电力公司收费管理系统管理系统操作用电信息表", size=(1024,668))
         opseration.Show()
 
 # 用电类型
-class response5():
-    def Onclick(self, *args):
+    def Onclick5(self, *args):
         opseration = UserOperation('用电类型', '类别号', '类别名', '电价',
                                    title="广油计科17-1电力公司收费管理系统管理系统操作用电类型表", size=(1024,668))
         opseration.Show()
 
 # 费用管理
-class response6():
-    def Onclick(self, *args):
+    def Onclick6(self, *args):
         opseration = UserOperation('费用管理', '客户号', '月份', '员工号', '费用', '收费标志',
                                    title="广油计科17-1电力公司收费管理系统管理系统操作费用管理表", size=(1024,668))
         opseration.Show()
