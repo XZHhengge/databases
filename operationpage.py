@@ -132,11 +132,11 @@ class InquireOp(UserOperation):
         column_names = (info[i] for i in range(len(info)))
         column_names = tuple(column_names)
         stu_grid = wx.grid.Grid(self.pnl)
-        stu_grid.CreateGrid(len(np), len(np[0]) - 1)
+        stu_grid.CreateGrid(len(np), len(np[0]))
         for row in range(len(np)):
             stu_grid.SetRowLabelValue(row, str(np[row][0]))  # 确保网格序列号与数据库id保持一致
             for col in range(1, len(np[row])):
-                stu_grid.SetColLabelValue(col - 1, column_names[col - 1])
+                stu_grid.SetColLabelValue(col - 1, column_names[col])
                 stu_grid.SetCellValue(row, col - 1, str(np[row][col]))
         stu_grid.AutoSize()
         return stu_grid
@@ -170,34 +170,62 @@ class AddOp(UserOperation):
         self.add_affirm.Bind(wx.EVT_BUTTON, self.AddAffirm)
         #################################################################################
         # 创建静态框
-        sb_name = wx.StaticBox(self.pnl, label="客户号")
-        # sb_gender = wx.StaticBox(self.pnl, label="性  别")
-        sb_age = wx.StaticBox(self.pnl, label="客户名")
-        sb_cid = wx.StaticBox(self.pnl, label="地址")
-        # sb_classid = wx.StaticBox(self.pnl, label="学习课程")
-        sb_phone = wx.StaticBox(self.pnl, label="联系方式")
+        sb_name = wx.StaticBox(self.pnl, label="{}".format(info[1]))
+        sb_age = wx.StaticBox(self.pnl, label="{}".format(info[2]))
+        sb_cid = wx.StaticBox(self.pnl, label="{}".format(info[3]))
+        sb_classid = wx.StaticBox(self.pnl, label="{}".format(info[4]))
+        try:
+            sb_gender = wx.StaticBox(self.pnl, label="{}".format(info[5]))
+        except:
+            pass
         # 创建水平方向box布局管理器
+        try:
+            sb_phone = wx.StaticBox(self.pnl, label="{}".format(info[6]))
+        except:
+            pass
         hsbox_name = wx.StaticBoxSizer(sb_name, wx.HORIZONTAL)
-        # hsbox_gender = wx.StaticBoxSizer(sb_gender, wx.HORIZONTAL)
         hsbox_age = wx.StaticBoxSizer(sb_age, wx.HORIZONTAL)
         hsbox_cid = wx.StaticBoxSizer(sb_cid, wx.HORIZONTAL)
-        # hsbox_classid = wx.StaticBoxSizer(sb_classid, wx.HORIZONTAL)
-        hsbox_phone = wx.StaticBoxSizer(sb_phone, wx.HORIZONTAL)
+        hsbox_classid = wx.StaticBoxSizer(sb_classid, wx.HORIZONTAL)
+        try:
+            hsbox_gender = wx.StaticBoxSizer(sb_gender, wx.HORIZONTAL)
+        except:
+            pass
+
         # 添加到hsbox布局管理器
+        try:
+            hsbox_phone = wx.StaticBoxSizer(sb_phone, wx.HORIZONTAL)
+        except:
+            pass
+
+
+
         hsbox_name.Add(self.stu_name, 0, wx.EXPAND | wx.BOTTOM, 5)
-        # hsbox_gender.Add(self.stu_gender, 0, wx.EXPAND | wx.BOTTOM, 5)
         hsbox_age.Add(self.stu_age, 0, wx.EXPAND | wx.BOTTOM, 5)
         hsbox_cid.Add(self.stu_cid, 0, wx.EXPAND | wx.BOTTOM, 5)
-        # hsbox_classid.Add(self.stu_classid, 0, wx.EXPAND | wx.BOTTOM, 5)
-        hsbox_phone.Add(self.stu_phone, 0, wx.EXPAND | wx.BOTTOM, 5)
+        hsbox_classid.Add(self.stu_classid, 0, wx.EXPAND | wx.BOTTOM, 5)
+        try:
+            hsbox_gender.Add(self.stu_gender, 0, wx.EXPAND | wx.BOTTOM, 5)
+        except:
+            pass
+        try:
+            hsbox_phone.Add(self.stu_phone, 0, wx.EXPAND | wx.BOTTOM, 5)
+        except:
+            pass
         #################################################################################
         # 添加到vsbox_show_operation布局管理器
         self.vsbox_show_operation.Add(hsbox_name, 0, wx.CENTER | wx.TOP | wx.FIXED_MINSIZE, 5)
-        # self.vsbox_show_operation.Add(hsbox_gender, 0, wx.CENTER | wx.TOP | wx.FIXED_MINSIZE, 5)
         self.vsbox_show_operation.Add(hsbox_age, 0, wx.CENTER | wx.TOP | wx.FIXED_MINSIZE, 5)
         self.vsbox_show_operation.Add(hsbox_cid, 0, wx.CENTER | wx.TOP | wx.FIXED_MINSIZE, 5)
-        # self.vsbox_show_operation.Add(hsbox_classid, 0, wx.CENTER | wx.TOP | wx.FIXED_MINSIZE, 5)
-        self.vsbox_show_operation.Add(hsbox_phone, 0, wx.CENTER | wx.TOP | wx.FIXED_MINSIZE, 5)
+        self.vsbox_show_operation.Add(hsbox_classid, 0, wx.CENTER | wx.TOP | wx.FIXED_MINSIZE, 5)
+        try:
+            self.vsbox_show_operation.Add(hsbox_gender, 0, wx.CENTER | wx.TOP | wx.FIXED_MINSIZE, 5)
+        except:
+            pass
+        try:
+            self.vsbox_show_operation.Add(hsbox_phone, 0, wx.CENTER | wx.TOP | wx.FIXED_MINSIZE, 5)
+        except:
+            pass
         self.vsbox_show_operation.Add(self.add_affirm, 0, wx.CENTER | wx.TOP | wx.FIXED_MINSIZE, 5)
 
     def ClickButton(self, event):
