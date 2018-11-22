@@ -2,8 +2,7 @@
 import wx
 import wx.grid
 from sql import Sql_operation
-# global info
-# info = []
+
 class UserOperation(wx.Frame):
 # class UserOperation(wx.Dialog):
     '''
@@ -25,7 +24,16 @@ class UserOperation(wx.Frame):
 
         global info
         info = args[1:]
-        # print(info)
+        if len(info) > 1:
+            with open('test.txt', 'w') as f:
+                for i in info:
+                    f.write(i+'\n')
+        elif len(info) == 1:
+            pass
+        with open('test.txt', 'r') as f:
+            info = f.read().splitlines()
+            global table
+            table = info[0]
         self.vbox = wx.BoxSizer(wx.VERTICAL)
         #################################################################################
         # 创建logo静态文本，设置字体属性
@@ -92,10 +100,9 @@ class UserOperation(wx.Frame):
 class InquireOp(UserOperation):
     def __init__(self, *args, **kw):
         # ensure the parent's __init__ is called
-        # list1 = args[0]
         super(InquireOp, self).__init__(None, **kw)
         # 创建学生信息网格
-        self.stu_grid = self.CreateGrid(self, args[0])
+        self.stu_grid = self.CreateGrid(self, info)
         # self.stu_grid.Bind(wx.grid.EVT_GRID_LABEL_LEFT_CLICK, self.OnLabelleftClick)
         # 添加到vsbox_show_operation布局管理器
         self.vsbox_show_operation.Add(self.stu_grid, 0, wx.CENTER | wx.TOP | wx.FIXED_MINSIZE, 30)
@@ -118,15 +125,11 @@ class InquireOp(UserOperation):
             self.Close(True)
 
     def CreateGrid(self, *args):
-        global a,b
-        a = args[1]
-
-        b = a[0]
         # 连接login_users数据库
         op = Sql_operation("databases")
         # 获取stu_information表中的学生信息，返回为二维元组
-        np = op.FindAll(b)
-        column_names = (a[i] for i in range(len(a)))
+        np = op.FindAll(table)
+        column_names = (info[i] for i in range(len(info)))
         column_names = tuple(column_names)
         stu_grid = wx.grid.Grid(self.pnl)
         stu_grid.CreateGrid(len(np), len(np[0]) - 1)
