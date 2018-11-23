@@ -31,6 +31,7 @@ class UserOperation(wx.Frame):
         elif len(info) == 1:
             pass
         with open('test.txt', 'r') as f:
+            #str->list
             info = f.read().splitlines()
             global table
             table = info[0]
@@ -165,6 +166,7 @@ class AddOp(UserOperation):
         self.stu_cid = wx.TextCtrl(self.pnl, size=(210, 25))
         self.stu_classid = wx.TextCtrl(self.pnl, size=(210, 25))
         self.stu_phone = wx.TextCtrl(self.pnl, size=(210, 25))
+        self.stu_cost = wx.TextCtrl(self.pnl, size=(210,25))
         self.add_affirm = wx.Button(self.pnl, label="添加", size=(80, 25))
         # 为添加按钮组件绑定事件处理
         self.add_affirm.Bind(wx.EVT_BUTTON, self.AddAffirm)
@@ -309,8 +311,7 @@ class DelOp(InquireOp):
         # 向stu_information表添加学生信息
         del_id = self.del_id.GetValue()
         print(del_id)
-        np = op.Del(int(del_id))
-
+        np = op.Del(int(del_id),info)
         del_button = DelOp(None, title=u"电力公司收费管理系统管理系统", size=(1024, 668))
         del_button.Show()
         self.Close(True)

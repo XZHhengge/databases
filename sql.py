@@ -54,12 +54,23 @@ class Sql_operation(object):
             self.db.rollback()
             print("SQL执行错误，原因：", err)
 
+    def updata_table(self, *args):
+
+        sql = ""
+        try:
+            pass
+        except Exception as e:
+            self
+        print("SQL执行错误，原因：", e)
+
     # 定义删除表数据函数
-    def Del(self, stu_id):
+    def Del(self, stu_id, *args):
         # 实例变量
+        table = args[0][0]
+        table_id = args[0][1]
         self.stu_id = stu_id
         # 定义SQL语句
-        sql = "delete from stu_info where id=%d" % (self.stu_id)
+        sql = "delete from {} where {}={}".format(table, table_id,stu_id)
         try:
             # 执行数据库操作
             self.cursor.execute(sql)
