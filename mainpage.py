@@ -62,7 +62,7 @@ class response():
 
     # 用电类型
     def Onclick5(self, *args):
-        opseration = UserOperation('用电类型', '类别号', '类别名', '电价',
+        opseration = UserOperation('用电类型', '类别号','客户号', '类别名', '电价',
                                    title="广油计科17-1电力公司收费管理系统管理系统操作用电类型表", size=(1024,668))
         opseration.Show()
 

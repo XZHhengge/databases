@@ -79,18 +79,18 @@ class UserOperation(wx.Frame):
     def ClickButton(self, event, *args):
         source_id = event.GetId()
         if source_id == 10:
-            print("查询操作！")
+            print("初始化查询操作！")
             inquire_button = InquireOp(info, title=u"电力公司收费管理系统管理系统", size=(1024, 668))
             inquire_button.Show()
             self.Close(True)
         elif source_id == 11:
-            print("添加操作！")
-            add_button = AddOp(None, title=u"电力公司收费管理系统管理系统", size=(1024, 668))
+            print("初始化添加操作！")
+            add_button = AddOp(info, title=u"电力公司收费管理系统管理系统", size=(1024, 668))
             add_button.Show()
             self.Close(True)
         elif source_id == 12:
-            print("删除操作！")
-            del_button = DelOp(None, title=u"电力公司收费管理系统管理系统", size=(1024, 668))
+            print("初始化删除操作！")
+            del_button = DelOp(info, title=u"电力公司收费管理系统管理系统", size=(1024, 668))
             del_button.Show()
             self.Close(True)
         elif source_id == 13:
@@ -113,13 +113,13 @@ class InquireOp(UserOperation):
         if source_id == 10:
             pass
         elif source_id == 11:
-            print("添加操作！")
-            add_button = AddOp(None, title=u"电力公司收费管理系统管理系统", size=(1024, 668))
+            print("InquireOp添加操作！")
+            add_button = AddOp(info, title=u"电力公司收费管理系统管理系统", size=(1024, 668))
             add_button.Show()
             self.Close(True)
         elif source_id == 12:
-            print("删除操作！")
-            del_button = DelOp(None, title=u"电力公司收费管理系统管理系统", size=(1024, 668))
+            print("InquireOp删除操作！")
+            del_button = DelOp(info, title=u"电力公司收费管理系统管理系统", size=(1024, 668))
             del_button.Show()
             self.Close(True)
         elif source_id == 13:
@@ -133,9 +133,9 @@ class InquireOp(UserOperation):
         column_names = (info[i] for i in range(len(info)))
         column_names = tuple(column_names)
         stu_grid = wx.grid.Grid(self.pnl)
-        stu_grid.CreateGrid(len(np), len(np[0]))
+        stu_grid.CreateGrid(len(np), len(np[0]) - 1)
         for row in range(len(np)):
-            stu_grid.SetRowLabelValue(row, str(np[row][0]))  # 确保网格序列号与数据库id保持一致
+            stu_grid.SetRowLabelValue(row  , str(np[row][0]) )  # 确保网格序列号与数据库id保持一致
             for col in range(1, len(np[row])):
                 stu_grid.SetColLabelValue(col - 1, column_names[col])
                 stu_grid.SetCellValue(row, col - 1, str(np[row][col]))
@@ -159,7 +159,6 @@ class AddOp(UserOperation):
         # ensure the parent's __init__ is called
         super(AddOp, self).__init__(*args, **kw)
         # 创建添加学生信息输入框、添加按钮
-        self.stu_name = wx.TextCtrl(self.pnl, size=(210, 25))
         self.stu_name = wx.TextCtrl(self.pnl, size=(210, 25))
         self.stu_gender = wx.TextCtrl(self.pnl, size=(210, 25))
         self.stu_age = wx.TextCtrl(self.pnl, size=(210, 25))
@@ -185,6 +184,9 @@ class AddOp(UserOperation):
             sb_phone = wx.StaticBox(self.pnl, label="{}".format(info[6]))
         except:
             pass
+
+        # try:
+        #     sb_cost = wx.StaticBox(self.pnl, label = )
         hsbox_name = wx.StaticBoxSizer(sb_name, wx.HORIZONTAL)
         hsbox_age = wx.StaticBoxSizer(sb_age, wx.HORIZONTAL)
         hsbox_cid = wx.StaticBoxSizer(sb_cid, wx.HORIZONTAL)
@@ -233,15 +235,15 @@ class AddOp(UserOperation):
     def ClickButton(self, event):
         source_id = event.GetId()
         if source_id == 10:
-            print("查询操作！")
-            inquire_button = InquireOp(None, title=u"电力公司收费管理系统管理系统", size=(1024, 668))
+            print("AddOp查询操作！")
+            inquire_button = InquireOp(info, title=u"电力公司收费管理系统管理系统", size=(1024, 668))
             inquire_button.Show()
             self.Close(True)
         elif source_id == 11:
             pass
         elif source_id == 12:
-            print("删除操作！")
-            del_button = DelOp(None, title=u"电力公司收费管理系统管理系统", size=(1024, 668))
+            print("AddOp删除操作！")
+            del_button = DelOp(info, title=u"电力公司收费管理系统管理系统", size=(1024, 668))
             del_button.Show()
             self.Close(True)
         elif source_id == 13:
@@ -252,18 +254,18 @@ class AddOp(UserOperation):
         op = Sql_operation("databases")
         # 向stu_information表添加学生信息
         stu_name = self.stu_name.GetValue()
-        print(stu_name)
+        print('stu_name',stu_name)  #客户号
         stu_gender = self.stu_gender.GetValue()
-        print(stu_gender)
+        print('stu_gender',stu_gender)
         stu_age = self.stu_age.GetValue()
-        print(stu_age)
+        print('stu_age',stu_age) #客户名
         stu_cid = self.stu_cid.GetValue()
-        print(stu_cid)
+        print('stu_cid',stu_cid) #地址
         stu_classid = self.stu_classid.GetValue()
-        print(stu_classid)
+        print('stu_classid',stu_classid) #联系方式
         stu_phone = self.stu_phone.GetValue()
-        print(stu_phone)
-        np = op.Insert(stu_name, stu_gender, stu_age, stu_cid, stu_classid, stu_phone)
+        print('stu_phone',stu_phone)
+        np = op.Insert(stu_name, stu_gender, stu_age, stu_cid, stu_classid, stu_phone, info=info)
 
 
 # 继承InquireOp类，实现初始化操作界面
@@ -291,13 +293,13 @@ class DelOp(InquireOp):
     def ClickButton(self, event):
         source_id = event.GetId()
         if source_id == 10:
-            print("查询操作！")
-            inquire_button = InquireOp(None, title=u"电力公司收费管理系统管理系统", size=(1024, 668))
+            print("DelOp查询操作！")
+            inquire_button = InquireOp(info, title=u"电力公司收费管理系统管理系统", size=(1024, 668))
             inquire_button.Show()
             self.Close(True)
         elif source_id == 11:
-            print("添加操作！")
-            add_button = AddOp(None, title=u"电力公司收费管理系统管理系统", size=(1024, 668))
+            print("DelOp添加操作！")
+            add_button = AddOp(info, title=u"电力公司收费管理系统管理系统", size=(1024, 668))
             add_button.Show()
             self.Close(True)
         elif source_id == 12:
@@ -312,6 +314,6 @@ class DelOp(InquireOp):
         del_id = self.del_id.GetValue()
         print(del_id)
         np = op.Del(int(del_id),info)
-        del_button = DelOp(None, title=u"电力公司收费管理系统管理系统", size=(1024, 668))
+        del_button = DelOp(info, title=u"电力公司收费管理系统管理系统", size=(1024, 668))
         del_button.Show()
         self.Close(True)
