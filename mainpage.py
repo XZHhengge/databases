@@ -41,7 +41,8 @@ class response():
         opseration = UserOperation('客户', '客户号','客户名', '地址', '联系方式',
                                    title="广油计科17-1电力公司收费管理系统管理系统操作客户表", size=(1024,668))
         opseration.Show()
-        # 员工
+
+    # 员工
     def Onclick2(self, *args):
         opseration = UserOperation('员工', '员工号', '姓名', '性别', '联系方式',
                                    title="广油计科17-1电力公司收费管理系统管理系统操作员工表", size=(1024,668))
@@ -59,18 +60,17 @@ class response():
                                    title="广油计科17-1电力公司收费管理系统管理系统操作用电信息表", size=(1024,668))
         opseration.Show()
 
-# 用电类型
+    # 用电类型
     def Onclick5(self, *args):
         opseration = UserOperation('用电类型', '类别号', '类别名', '电价',
                                    title="广油计科17-1电力公司收费管理系统管理系统操作用电类型表", size=(1024,668))
         opseration.Show()
 
-# 费用管理
+    # 费用管理
     def Onclick6(self, *args):
         opseration = UserOperation('费用管理', '客户号', '月份', '员工号', '费用', '收费标志',
                                    title="广油计科17-1电力公司收费管理系统管理系统操作费用管理表", size=(1024,668))
         opseration.Show()
-
 
 
 
