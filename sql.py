@@ -33,7 +33,7 @@ class Sql_operation(object):
             print("SQL执行错误，原因：", err)
 
     # 定义添加表数据函数
-    def Insert(self, stu_name, stu_gender, stu_age, stu_cid, stu_classid, stu_phone):
+    def Insert(self, stu_name, stu_gender, stu_age, stu_cid, stu_classid, stu_phone, info):
         # 实例变量
         self.stu_name = stu_name
         self.stu_gender = stu_gender
@@ -41,9 +41,10 @@ class Sql_operation(object):
         self.stu_cid = stu_cid
         self.stu_classid = stu_classid
         self.stu_phone = stu_phone
+        print('zheli',stu_name,stu_age,stu_cid,stu_classid,stu_gender,stu_phone)
         # 定义SQL语句
-        sql = "insert into stu_info(stu_name,stu_gender,stu_age,stu_cid,stu_classid,stu_phone) values('%s','%s','%s','%s','%s','%s')" % (
-        self.stu_name, self.stu_gender, self.stu_age, self.stu_cid, self.stu_classid, self.stu_phone)
+        sql = "insert into {}({},{},{},{},{}) values('%s','%s','%s','%s','%s')".format(info[0], '客户表客户号', info[1], info[2], info[3], info[4]) % (
+        None,self.stu_name, self.stu_gender, self.stu_age, self.stu_cid, self.stu_classid, self.stu_phone)
         try:
             # 执行数据库操作
             self.cursor.execute(sql)
@@ -56,7 +57,7 @@ class Sql_operation(object):
 
     def updata_table(self, *args):
 
-        sql = ""
+        sql = "update {} set {}"
         try:
             pass
         except Exception as e:
