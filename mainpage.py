@@ -8,7 +8,7 @@ from operationpage import UserOperation
 class MyFrame1(wx.Frame):
     def __init__(self, parent):
         #Wx.Frame (parent, id, title, pos, size, style, name)
-        wx.Frame.__init__(self, parent, id=wx.ID_ANY, title=u"广油计科17-1电力公司收费管理系统管理系统", pos=wx.DefaultPosition, size=wx.Size(610, 400),
+        wx.Frame.__init__(self, parent, id=wx.ID_ANY, title=u"广油计科17-1---电力公司收费管理系统管理系统", pos=wx.DefaultPosition, size=wx.Size(610, 400),
                           style=wx.DEFAULT_FRAME_STYLE | wx.TAB_TRAVERSAL)
         self.Center() #居中显示 # 小构件，如按钮，文本框等被放置在面板窗口。 wx.Panel类通常是被放在一个wxFrame对象中。这个类也继承自wxWindow类。
 
@@ -39,37 +39,37 @@ class MyFrame1(wx.Frame):
 class response():
     def Onclick(self, *args):
         opseration = UserOperation('客户', '客户号','客户名', '地址', '联系方式',
-                                   title="广油计科17-1电力公司收费管理系统管理系统操作客户表", size=(1024,668))
+                                   title="操作--客户表", size=(1024,668))
         opseration.Show()
 
     # 员工
     def Onclick2(self, *args):
         opseration = UserOperation('员工', '员工号', '姓名', '性别', '联系方式',
-                                   title="广油计科17-1电力公司收费管理系统管理系统操作员工表", size=(1024,668))
+                                   title="操--作员工表", size=(1024,668))
         opseration.Show()
 
     # 收费登记
     def Onclick3(self, *args):
         opseration = UserOperation('收费登记', '客户号', '月份', '员工号', '应收费用', '实收费用', '结余费用',
-                                   title="广油计科17-1电力公司收费管理系统管理系统操作收费登记表", size=(1024,668))
+                                   title="操作--收费登记表", size=(1024,668))
         opseration.Show()
 
     # 用电信息
     def Onclick4(self, *args):
         opseration = UserOperation('用电信息', '客户号', '类别号', '月份', '客户_客户号', '用电度数',
-                                   title="广油计科17-1电力公司收费管理系统管理系统操作用电信息表", size=(1024,668))
+                                   title="操作--用电信息表", size=(1024,668))
         opseration.Show()
 
     # 用电类型
     def Onclick5(self, *args):
         opseration = UserOperation('用电类型', '类别号','客户号', '类别名', '电价',
-                                   title="广油计科17-1电力公司收费管理系统管理系统操作用电类型表", size=(1024,668))
+                                   title="操作--用电类型表", size=(1024,668))
         opseration.Show()
 
     # 费用管理
     def Onclick6(self, *args):
         opseration = UserOperation('费用管理', '客户号', '月份', '员工号', '费用', '收费标志',
-                                   title="广油计科17-1电力公司收费管理系统管理系统操作费用管理表", size=(1024,668))
+                                   title="操作--费用管理表", size=(1024,668))
         opseration.Show()
 
 

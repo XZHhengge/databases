@@ -80,17 +80,17 @@ class UserOperation(wx.Frame):
         source_id = event.GetId()
         if source_id == 10:
             print("初始化查询操作！")
-            inquire_button = InquireOp(info, title=u"电力公司收费管理系统管理系统", size=(1024, 668))
+            inquire_button = InquireOp(info, title=u"操作{}表".format(info[0]), size=(1024, 668))
             inquire_button.Show()
             self.Close(True)
         elif source_id == 11:
             print("初始化添加操作！")
-            add_button = AddOp(info, title=u"电力公司收费管理系统管理系统", size=(1024, 668))
+            add_button = AddOp(info, title=u"操作{}表".format(info[0]), size=(1024, 668))
             add_button.Show()
             self.Close(True)
         elif source_id == 12:
             print("初始化删除操作！")
-            del_button = DelOp(info, title=u"电力公司收费管理系统管理系统", size=(1024, 668))
+            del_button = DelOp(info, title=u"操作{}表".format(info[0]), size=(1024, 668))
             del_button.Show()
             self.Close(True)
         elif source_id == 13:
@@ -114,12 +114,12 @@ class InquireOp(UserOperation):
             pass
         elif source_id == 11:
             print("InquireOp添加操作！")
-            add_button = AddOp(info, title=u"电力公司收费管理系统管理系统", size=(1024, 668))
+            add_button = AddOp(info, title=u"操作{}表".format(info[0]), size=(1024, 668))
             add_button.Show()
             self.Close(True)
         elif source_id == 12:
             print("InquireOp删除操作！")
-            del_button = DelOp(info, title=u"电力公司收费管理系统管理系统", size=(1024, 668))
+            del_button = DelOp(info, title=u"操作{}表".format(info[0]), size=(1024, 668))
             del_button.Show()
             self.Close(True)
         elif source_id == 13:
@@ -180,10 +180,10 @@ class AddOp(UserOperation):
         except:
             pass
         # 创建水平方向box布局管理器
-        try:
-            sb_phone = wx.StaticBox(self.pnl, label="{}".format(info[6]))
-        except:
-            pass
+        # try:
+        #     sb_phone = wx.StaticBox(self.pnl, label="{}".format(info[6]))
+        # except:
+        #     pass
 
         # try:
         #     sb_cost = wx.StaticBox(self.pnl, label = )
@@ -197,10 +197,10 @@ class AddOp(UserOperation):
             pass
 
         # 添加到hsbox布局管理器
-        try:
-            hsbox_phone = wx.StaticBoxSizer(sb_phone, wx.HORIZONTAL)
-        except:
-            pass
+        # try:
+        #     hsbox_phone = wx.StaticBoxSizer(sb_phone, wx.HORIZONTAL)
+        # except:
+        #     pass
 
 
 
@@ -212,10 +212,10 @@ class AddOp(UserOperation):
             hsbox_gender.Add(self.stu_gender, 0, wx.EXPAND | wx.BOTTOM, 5)
         except:
             pass
-        try:
-            hsbox_phone.Add(self.stu_phone, 0, wx.EXPAND | wx.BOTTOM, 5)
-        except:
-            pass
+        # try:
+        #     hsbox_phone.Add(self.stu_phone, 0, wx.EXPAND | wx.BOTTOM, 5)
+        # except:
+        #     pass
         #################################################################################
         # 添加到vsbox_show_operation布局管理器
         self.vsbox_show_operation.Add(hsbox_name, 0, wx.CENTER | wx.TOP | wx.FIXED_MINSIZE, 5)
@@ -226,24 +226,24 @@ class AddOp(UserOperation):
             self.vsbox_show_operation.Add(hsbox_gender, 0, wx.CENTER | wx.TOP | wx.FIXED_MINSIZE, 5)
         except:
             pass
-        try:
-            self.vsbox_show_operation.Add(hsbox_phone, 0, wx.CENTER | wx.TOP | wx.FIXED_MINSIZE, 5)
-        except:
-            pass
+        # try:
+        #     self.vsbox_show_operation.Add(hsbox_phone, 0, wx.CENTER | wx.TOP | wx.FIXED_MINSIZE, 5)
+        # except:
+        #     pass
         self.vsbox_show_operation.Add(self.add_affirm, 0, wx.CENTER | wx.TOP | wx.FIXED_MINSIZE, 5)
 
     def ClickButton(self, event):
         source_id = event.GetId()
         if source_id == 10:
             print("AddOp查询操作！")
-            inquire_button = InquireOp(info, title=u"电力公司收费管理系统管理系统", size=(1024, 668))
+            inquire_button = InquireOp(info, title=u"操作{}表".format(info[0]), size=(1024, 668))
             inquire_button.Show()
             self.Close(True)
         elif source_id == 11:
             pass
         elif source_id == 12:
             print("AddOp删除操作！")
-            del_button = DelOp(info, title=u"电力公司收费管理系统管理系统", size=(1024, 668))
+            del_button = DelOp(info, title=u"操作{}表".format(info[0]), size=(1024, 668))
             del_button.Show()
             self.Close(True)
         elif source_id == 13:
@@ -294,12 +294,12 @@ class DelOp(InquireOp):
         source_id = event.GetId()
         if source_id == 10:
             print("DelOp查询操作！")
-            inquire_button = InquireOp(info, title=u"电力公司收费管理系统管理系统", size=(1024, 668))
+            inquire_button = InquireOp(info, title=u"操作{}表".format(info[0]), size=(1024, 668))
             inquire_button.Show()
             self.Close(True)
         elif source_id == 11:
             print("DelOp添加操作！")
-            add_button = AddOp(info, title=u"电力公司收费管理系统管理系统", size=(1024, 668))
+            add_button = AddOp(info, title=u"操作{}表".format(info[0]), size=(1024, 668))
             add_button.Show()
             self.Close(True)
         elif source_id == 12:
@@ -314,6 +314,6 @@ class DelOp(InquireOp):
         del_id = self.del_id.GetValue()
         print(del_id)
         np = op.Del(int(del_id),info)
-        del_button = DelOp(info, title=u"电力公司收费管理系统管理系统", size=(1024, 668))
+        del_button = DelOp(info, title=u"操作{}表".format(info[0]), size=(1024, 668))
         del_button.Show()
         self.Close(True)
