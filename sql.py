@@ -84,6 +84,7 @@ class Sql_operation(object):
             print("SQL执行错误，原因：", err)
 
     def updata_table(self, *args):
+        print(args)
 
         sql = "update {} set {}"
         try:

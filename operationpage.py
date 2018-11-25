@@ -326,29 +326,74 @@ class DelOp(InquireOp):
         del_button.Show()
         self.Close(True)
 
-class change_class(InquireOp):
+class change_class(UserOperation):
     def __init__(self, *args, **kw):
         # ensure the parent's __init__ is called
         super(change_class, self).__init__(*args, **kw)
         # 创建删除学员信息输入框、删除按钮
-        self.update_id = wx.TextCtrl(self.pnl, pos=(407, 78), size=(210, 25))
-        self.update_2 = wx.TextCtrl(self.pnl, pos=(407,50), size=(210,25))
-        self.update_affirm = wx.Button(self.pnl, label="修改", pos=(625, 78), size=(80, 25))
+        self.update_id = wx.TextCtrl(self.pnl, size=(210, 25))
+        self.update_2 = wx.TextCtrl(self.pnl, size=(210, 25))
+        self.update_3 = wx.TextCtrl(self.pnl, size=(210, 25))
+        self.update_4 = wx.TextCtrl(self.pnl, size=(210, 25))
+        self.update_5 = wx.TextCtrl(self.pnl, size=(210, 25))
+        self.update_6 = wx.TextCtrl(self.pnl, size=(210, 25))
+        self.update_affirm = wx.Button(self.pnl, label="修改", size=(80, 25))
         # 为删除按钮组件绑定事件处理
         self.update_affirm.Bind(wx.EVT_BUTTON, self.changeAffirm)
         #################################################################################
         # 创建静态框
-        sb_del = wx.StaticBox(self.pnl, label="请选择要修改的ID")
-        update2 = wx.StaticBox(self.pnl, label="请输入")
+        sb_del = wx.StaticBox(self.pnl, label="请选择要修改的ID",)
+        update2 = wx.StaticBox(self.pnl, label="请输入{}".format(info[1]))
+        update3 = wx.StaticBox(self.pnl, label="请输入{}".format(info[2]))
+        update4 = wx.StaticBox(self.pnl, label="请输入{}".format(info[3]))
+        try:
+            update5 = wx.StaticBox(self.pnl, label="请输入{}".format(info[4]))
+        except:
+            pass
+        try:
+            update6 = wx.StaticBox(self.pnl, label="请输入{}".format(info[5]))
+        except:
+            pass
         # 创建水平方向box布局管理器
         hsbox_del = wx.StaticBoxSizer(sb_del, wx.HORIZONTAL)
         hsbox2 = wx.StaticBoxSizer(update2, wx.HORIZONTAL)
+        hsbox3 = wx.StaticBoxSizer(update3, wx.HORIZONTAL)
+        hsbox4 = wx.StaticBoxSizer(update4, wx.HORIZONTAL)
+        try:
+            hsbox5 = wx.StaticBoxSizer(update5, wx.HORIZONTAL)
+        except:
+            pass
+        try:
+            hsbox6 = wx.StaticBoxSizer(update6, wx.HORIZONTAL)
+        except:
+            pass
         # 添加到hsbox_name布局管理器
         hsbox_del.Add(self.update_id, 0, wx.EXPAND | wx.BOTTOM, 5)
         hsbox2.Add(self.update_2, 0, wx.EXPAND | wx.BOTTOM, 5)
+        hsbox3.Add(self.update_3, 0, wx.EXPAND | wx.BOTTOM, 5)
+        hsbox4.Add(self.update_4, 0, wx.EXPAND | wx.BOTTOM, 5)
+        try:
+            hsbox5.Add(self.update_5, 0, wx.EXPAND | wx.BOTTOM, 5)
+        except:
+            pass
+        try:
+            hsbox6.Add(self.update_6, 0, wx.EXPAND | wx.BOTTOM, 5)
+        except:
+            pass
         # 添加到vsbox_show_operation布局管理器
         self.vsbox_show_operation.Add(hsbox_del, 0, wx.CENTER | wx.TOP | wx.FIXED_MINSIZE, 5)
         self.vsbox_show_operation.Add(hsbox2, 0, wx.CENTER | wx.TOP | wx.FIXED_MINSIZE, 5)
+        self.vsbox_show_operation.Add(hsbox3, 0, wx.CENTER | wx.TOP | wx.FIXED_MINSIZE, 5)
+        self.vsbox_show_operation.Add(hsbox4, 0, wx.CENTER | wx.TOP | wx.FIXED_MINSIZE, 5)
+        self.vsbox_show_operation.Add(hsbox4, 0, wx.CENTER | wx.TOP | wx.FIXED_MINSIZE, 5)
+        try:
+            self.vsbox_show_operation.Add(hsbox5, 0, wx.CENTER | wx.TOP | wx.FIXED_MINSIZE, 5)
+        except:
+            pass
+        try:
+            self.vsbox_show_operation.Add(hsbox6, 0, wx.CENTER | wx.TOP | wx.FIXED_MINSIZE, 5)
+        except:
+            pass
         self.vsbox_show_operation.Add(self.update_affirm, 0, wx.CENTER | wx.TOP | wx.FIXED_MINSIZE, 5)
 
     def ClickButton(self, event):
@@ -373,8 +418,8 @@ class change_class(InquireOp):
         op = Sql_operation("databases")
         # 向stu_information表添加学生信息
         update_id = self.update_id.GetValue()
-        print()
-        np = op.updata_table(int(update_id),info)
+        print(self.update_2.GetValue())
+        np = op.updata_table(int(update_id), info)
         del_button = change_class(info, title=u"操作{}表".format(info[0]), size=(1024, 668))
         del_button.Show()
         self.Close(True)
