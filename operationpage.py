@@ -81,22 +81,22 @@ class UserOperation(wx.Frame):
         print(source_id)
         if source_id == 10:
             print("初始化查询操作！")
-            inquire_button = InquireOp(info, title=u"操作{}表".format(info[0]), size=(1024, 668))
+            inquire_button = InquireOp(info, title=u"广油计科17-1--------查询{}表".format(info[0]), size=(1024, 668))
             inquire_button.Show()
             self.Close(True)
         elif source_id == 11:
             print("初始化添加操作！")
-            add_button = AddOp(info, title=u"操作{}表".format(info[0]), size=(1024, 668))
+            add_button = AddOp(info, title=u"广油计科17-1--------添加{}表".format(info[0]), size=(1024, 668))
             add_button.Show()
             self.Close(True)
         elif source_id == 12:
             print("初始化删除操作！")
-            del_button = DelOp(info, title=u"操作{}表".format(info[0]), size=(1024, 668))
+            del_button = DelOp(info, title=u"广油计科17-1--------删除{}表".format(info[0]), size=(1024, 668))
             del_button.Show()
             self.Close(True)
         elif source_id == 14:
             print("初始化修改操作！")
-            del_button = change_class(info, title=u"操作{}表".format(info[0]), size=(1024, 668))
+            del_button = change_class(info, title=u"广油计科17-1--------更改{}表".format(info[0]), size=(1024, 668))
             del_button.Show()
             self.Close(True)
         elif source_id == 13:
@@ -119,18 +119,15 @@ class InquireOp(UserOperation):
         if source_id == 10:
             pass
         elif source_id == 11:
-            print("InquireOp添加操作！")
-            add_button = AddOp(info, title=u"操作{}表".format(info[0]), size=(1024, 668))
+            add_button = AddOp(info, title=u"广油计科17-1--------添加{}表".format(info[0]), size=(1024, 668))
             add_button.Show()
             self.Close(True)
         elif source_id == 12:
-            print("InquireOp删除操作！")
-            del_button = DelOp(info, title=u"操作{}表".format(info[0]), size=(1024, 668))
+            del_button = DelOp(info, title=u"广油计科17-1--------删除{}表".format(info[0]), size=(1024, 668))
             del_button.Show()
             self.Close(True)
         elif source_id == 14:
-            print("InquireOp删除操作！")
-            del_button = change_class(info, title=u"操作{}表".format(info[0]), size=(1024, 668))
+            del_button = change_class(info, title=u"广油计科17-1--------更新{}表".format(info[0]), size=(1024, 668))
             del_button.Show()
             self.Close(True)
         elif source_id == 13:
@@ -236,20 +233,17 @@ class AddOp(UserOperation):
     def ClickButton(self, event):
         source_id = event.GetId()
         if source_id == 10:
-            print("AddOp查询操作！")
-            inquire_button = InquireOp(info, title=u"操作{}表".format(info[0]), size=(1024, 668))
+            inquire_button = InquireOp(info, title=u"查询{}表".format(info[0]), size=(1024, 668))
             inquire_button.Show()
             self.Close(True)
         elif source_id == 11:
             pass
         elif source_id == 12:
-            print("AddOp删除操作！")
-            del_button = DelOp(info, title=u"操作{}表".format(info[0]), size=(1024, 668))
+            del_button = DelOp(info, title=u"删除{}表".format(info[0]), size=(1024, 668))
             del_button.Show()
             self.Close(True)
         elif source_id == 14:
-            print("AddOp删除操作！")
-            del_button = change_class(info, title=u"操作{}表".format(info[0]), size=(1024, 668))
+            del_button = change_class(info, title=u"更新{}表".format(info[0]), size=(1024, 668))
             del_button.Show()
             self.Close(True)
         elif source_id == 13:
@@ -299,19 +293,19 @@ class DelOp(InquireOp):
     def ClickButton(self, event):
         source_id = event.GetId()
         if source_id == 10:
-            print("DelOp查询操作！")
-            inquire_button = InquireOp(info, title=u"操作{}表".format(info[0]), size=(1024, 668))
+            inquire_button = InquireOp(info, title=u"查询{}表".format(info[0]), size=(1024, 668))
             inquire_button.Show()
             self.Close(True)
         elif source_id == 11:
-            print("DelOp添加操作！")
-            add_button = AddOp(info, title=u"操作{}表".format(info[0]), size=(1024, 668))
+            add_button = AddOp(info, title=u"添加{}表".format(info[0]), size=(1024, 668))
             add_button.Show()
             self.Close(True)
         elif source_id == 12:
             pass
         elif source_id == 14:
-            pass
+            update_button = change_class(info, title=u"更新{}表".format(info[0]), size=(1024,668))
+            update_button.Show()
+            self.Close(True)
         elif source_id == 13:
             self.Close(True)
 
@@ -342,8 +336,8 @@ class change_class(UserOperation):
         self.update_affirm.Bind(wx.EVT_BUTTON, self.changeAffirm)
         #################################################################################
         # 创建静态框
-        sb_del = wx.StaticBox(self.pnl, label="请选择要修改的ID",)
-        update2 = wx.StaticBox(self.pnl, label="请输入{}".format(info[1]))
+        # sb_del = wx.StaticBox(self.pnl, label="请选择要修改的ID",)
+        update2 = wx.StaticBox(self.pnl, label="请输入要修改的{}".format(info[1]))
         update3 = wx.StaticBox(self.pnl, label="请输入{}".format(info[2]))
         update4 = wx.StaticBox(self.pnl, label="请输入{}".format(info[3]))
         try:
@@ -355,7 +349,7 @@ class change_class(UserOperation):
         except:
             pass
         # 创建水平方向box布局管理器
-        hsbox_del = wx.StaticBoxSizer(sb_del, wx.HORIZONTAL)
+        # hsbox_del = wx.StaticBoxSizer(sb_del, wx.HORIZONTAL)
         hsbox2 = wx.StaticBoxSizer(update2, wx.HORIZONTAL)
         hsbox3 = wx.StaticBoxSizer(update3, wx.HORIZONTAL)
         hsbox4 = wx.StaticBoxSizer(update4, wx.HORIZONTAL)
@@ -368,7 +362,7 @@ class change_class(UserOperation):
         except:
             pass
         # 添加到hsbox_name布局管理器
-        hsbox_del.Add(self.update_id, 0, wx.EXPAND | wx.BOTTOM, 5)
+        # hsbox_del.Add(self.update_id, 0, wx.EXPAND | wx.BOTTOM, 5)
         hsbox2.Add(self.update_2, 0, wx.EXPAND | wx.BOTTOM, 5)
         hsbox3.Add(self.update_3, 0, wx.EXPAND | wx.BOTTOM, 5)
         hsbox4.Add(self.update_4, 0, wx.EXPAND | wx.BOTTOM, 5)
@@ -381,7 +375,7 @@ class change_class(UserOperation):
         except:
             pass
         # 添加到vsbox_show_operation布局管理器
-        self.vsbox_show_operation.Add(hsbox_del, 0, wx.CENTER | wx.TOP | wx.FIXED_MINSIZE, 5)
+        # self.vsbox_show_operation.Add(hsbox_del, 0, wx.CENTER | wx.TOP | wx.FIXED_MINSIZE, 5)
         self.vsbox_show_operation.Add(hsbox2, 0, wx.CENTER | wx.TOP | wx.FIXED_MINSIZE, 5)
         self.vsbox_show_operation.Add(hsbox3, 0, wx.CENTER | wx.TOP | wx.FIXED_MINSIZE, 5)
         self.vsbox_show_operation.Add(hsbox4, 0, wx.CENTER | wx.TOP | wx.FIXED_MINSIZE, 5)
@@ -399,16 +393,18 @@ class change_class(UserOperation):
     def ClickButton(self, event):
         source_id = event.GetId()
         if source_id == 10:
-            print("change查询操作！")
-            inquire_button = InquireOp(info, title=u"操作{}表".format(info[0]), size=(1024, 668))
+            inquire_button = InquireOp(info, title=u"广油计科17-1--------查询{}表".format(info[0]), size=(1024, 668))
             inquire_button.Show()
             self.Close(True)
         elif source_id == 11:
-            print("change添加操作！")
-            add_button = AddOp(info, title=u"操作{}表".format(info[0]), size=(1024, 668))
+            add_button = AddOp(info, title=u"广油计科17-1--------添加{}表".format(info[0]), size=(1024, 668))
             add_button.Show()
             self.Close(True)
         elif source_id == 12:
+            del_button = DelOp(info, title=u"广油计科17-1--------删除{}表".format(info[0]), size=(1024, 668))
+            del_button.Show()
+            self.Close(True)
+        elif source_id == 14:
             pass
         elif source_id == 13:
             self.Close(True)
@@ -417,9 +413,14 @@ class change_class(UserOperation):
         # 连接login_users数据库
         op = Sql_operation("databases")
         # 向stu_information表添加学生信息
-        update_id = self.update_id.GetValue()
-        print(self.update_2.GetValue())
-        np = op.updata_table(int(update_id), info)
+        # update_id = self.update_id.GetValue()
+        update_2 = self.update_2.GetValue()
+        update_3 = self.update_3.GetValue()
+        update_4 = self.update_4.GetValue()
+        update_5 = self.update_5.GetValue()
+        update_6 = self.update_6.GetValue()
+        np = op.updata_table(info, update_2, update_3, update_4,
+                             update_5, update_6)
         del_button = change_class(info, title=u"操作{}表".format(info[0]), size=(1024, 668))
         del_button.Show()
         self.Close(True)

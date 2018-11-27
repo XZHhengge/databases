@@ -42,7 +42,6 @@ class Sql_operation(object):
 
         self.stu_gender = stu_gender #5
         self.stu_phone = stu_phone
-        print(info[1:])
         # 定义SQL语句
         if info[0] == '客户':
             sql = "insert into 客户({},{},{},{}) " \
@@ -83,15 +82,52 @@ class Sql_operation(object):
             self.db.rollback()
             print("SQL执行错误，原因：", err)
 
-    def updata_table(self, *args):
+    def updata_table(self, info, *args):
+        print(info)
         print(args)
+        list1 = []
+        list2 = ['用电信息', '费用管理',]
+        if info[0] == '客户':
+            sql = "update {} set {}={}, {}={}, {}={} where {} = {}"\
+                .format(info[0], info[2], args[1],info[3], args[2], info[4], args[3], '客户表客户号', args[0])
+            print(sql)
+        elif info[0] == '员工':
+            sql = "update {} set {}='{}', {}='{}', {}={} where {} = {}" \
+                .format(info[0], info[2], args[1],
+                        info[3], args[2], info[4], args[3], '员工表员工号', args[0])
+            print(sql)
+        elif info[0] == '用电类型':
+            sql = "update {} set {}={}, {}={}, {}={} where {} = '{}'" \
+                .format(info[0], info[2], args[1],
+                        info[3], args[2], info[4], args[3], '客户表客户号', args[0])
+            print(sql)
+        elif info[0] in list2:
+            sql = "update {} set {}='{}', {}='{}', {}='{}', {}='{}' where {} = '{}'" \
+                .format(info[0], info[2], args[1],
+                        info[3], args[2], info[4], args[3], info[5], args[4], '客户表客户号', args[0])
+            print(sql)
+        # elif info[0] in '用电信息':
+        #     sql = "update {} set {}='{}', {}='{}', {}='{}', {}='{}' where {} = '{}'" \
+        #         .format(info[0], info[2], args[1],
+        #                 info[3], args[2], info[4], args[3], info[5], args[4], '客户表客户号', args[0])
+        #     print(sql)
+        elif info[0] in '收费登记':
+            cost = float(args[3]) - float(args[4])
+            cost = str(cost)
+            sql = "update {} set {}='{}', {}='{}', {}='{}', {}='{}', {}='{}' where {} = '{}'" \
+                .format(info[0], info[2], args[1],
+                        info[3], args[2], info[4], args[3], info[5], args[4], '结余费用', cost, '客户表客户号', args[0])
+            print(sql)
 
-        sql = "update {} set {}"
         try:
-            pass
-        except Exception as e:
-            self
-        print("SQL执行错误，原因：", e)
+            # 执行数据库操作
+            self.cursor.execute(sql)
+            # 事务提交
+            self.db.commit()
+        except Exception as err:
+            # 事务回滚
+            self.db.rollback()
+            print("SQL执行错误，原因：", err)
 
     # 定义删除表数据函数
     def Del(self, stu_id, *args):
@@ -100,7 +136,7 @@ class Sql_operation(object):
         table_id = args[0][1]
         self.stu_id = stu_id
         # 定义SQL语句
-        sql = "delete from {} where {}={}".format(table, table_id,stu_id)
+        sql = "delete from {} where {}={}".format(table, table_id, stu_id)
         try:
             # 执行数据库操作
             self.cursor.execute(sql)

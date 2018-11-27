@@ -8,23 +8,24 @@ from operationpage import UserOperation
 class MyFrame1(wx.Frame):
     def __init__(self, parent):
         #Wx.Frame (parent, id, title, pos, size, style, name)
-        wx.Frame.__init__(self, parent, id=wx.ID_ANY, title=u"广油计科17-1---电力公司收费管理系统管理系统", pos=wx.DefaultPosition, size=wx.Size(610, 400),
+        wx.Frame.__init__(self, parent, id=wx.ID_ANY, title=u"广油计科17-1--------电力公司收费管理系统管理系统",
+                          pos=wx.DefaultPosition, size=wx.Size(610, 400),
                           style=wx.DEFAULT_FRAME_STYLE | wx.TAB_TRAVERSAL)
         self.Center() #居中显示 # 小构件，如按钮，文本框等被放置在面板窗口。 wx.Panel类通常是被放在一个wxFrame对象中。这个类也继承自wxWindow类。
 
         self.m_panel1 = wx.Panel(self)
 
-        self.m_button1 = wx.Button(self.m_panel1, wx.ID_ANY, u"操作客户表", (130, 20), wx.DefaultSize,
+        self.m_button1 = wx.Button(self.m_panel1, wx.ID_ANY, u"客户", (130, 20), wx.DefaultSize,
                                    style=wx.BORDER_MASK)
-        self.m_button2 = wx.Button(self.m_panel1, wx.ID_ANY, u"操作员工", (250, 20), wx.DefaultSize,
+        self.m_button2 = wx.Button(self.m_panel1, wx.ID_ANY, u"员工", (250, 20), wx.DefaultSize,
                                    style=wx.BORDER_MASK)
-        self.m_button3 = wx.Button(self.m_panel1, wx.ID_ANY, u"操作收费登记表", (370, 20), wx.DefaultSize,
+        self.m_button3 = wx.Button(self.m_panel1, wx.ID_ANY, u"收费登记", (370, 20), wx.DefaultSize,
                                    style=wx.BORDER_MASK)
-        self.m_button4 = wx.Button(self.m_panel1, wx.ID_ANY, u"操作用电信息表", (130, 90), wx.DefaultSize,
+        self.m_button4 = wx.Button(self.m_panel1, wx.ID_ANY, u"用电信息", (130, 90), wx.DefaultSize,
                                    style=wx.BORDER_MASK)
-        self.m_button5 = wx.Button(self.m_panel1, wx.ID_ANY, u"操作用电类型表", (250, 90), wx.DefaultSize,
+        self.m_button5 = wx.Button(self.m_panel1, wx.ID_ANY, u"用电类型", (250, 90), wx.DefaultSize,
                                    style=wx.BORDER_MASK)
-        self.m_button6 = wx.Button(self.m_panel1, wx.ID_ANY, u"操作费用管理表", (370, 90), wx.DefaultSize,
+        self.m_button6 = wx.Button(self.m_panel1, wx.ID_ANY, u"费用管理", (370, 90), wx.DefaultSize,
                                    style=wx.BORDER_MASK)
         # self.m_button7 = wx.Button(self.m_panel1, wx.ID_ANY, u"操作用电信息表", (130, 160), wx.DefaultSize,
         #                             style=wx.BORDER_MASK)
